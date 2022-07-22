@@ -56,40 +56,40 @@ jobs:
             cmake_generator: "Visual Studio 17 2022"
             cmake_args:      "-DDILIGENT_BUILD_CORE_TESTS=ON -DDILIGENT_BUILD_TOOLS_TESTS=ON -DDILIGENT_DEVELOPMENT=ON"
 
-          - name:            "Win8.1"
-            platform:        "Win32"
-            toolset:         "x64"
-            build_type:      "Release"
-            cmake_generator: "Visual Studio 17 2022"
-            cmake_args:      "-DDILIGENT_BUILD_CORE_TESTS=ON -DDILIGENT_BUILD_TOOLS_TESTS=ON -DCMAKE_SYSTEM_VERSION=8.1"
+          # - name:            "Win8.1"
+          #   platform:        "Win32"
+          #   toolset:         "x64"
+          #   build_type:      "Release"
+          #   cmake_generator: "Visual Studio 17 2022"
+          #   cmake_args:      "-DDILIGENT_BUILD_CORE_TESTS=ON -DDILIGENT_BUILD_TOOLS_TESTS=ON -DCMAKE_SYSTEM_VERSION=8.1"
 
-          - name:            "Win10-Ninja"
-            platform:        "Win32"
-            toolset:         "x64"
-            build_type:      "Debug"
-            cmake_generator: "Ninja"
-            cmake_args:      "-DDILIGENT_BUILD_CORE_TESTS=ON -DDILIGENT_BUILD_TOOLS_TESTS=ON"
+          # - name:            "Win10-Ninja"
+          #   platform:        "Win32"
+          #   toolset:         "x64"
+          #   build_type:      "Debug"
+          #   cmake_generator: "Ninja"
+          #   cmake_args:      "-DDILIGENT_BUILD_CORE_TESTS=ON -DDILIGENT_BUILD_TOOLS_TESTS=ON"
 
-          - name:            "MinGW"
-            platform:        "Win32"
-            toolset:         "x64"
-            build_type:      "Release" # Debug build is unbelievably slow
-            cmake_generator: "MinGW Makefiles"
-            cmake_args:      "-DDILIGENT_BUILD_CORE_TESTS=ON -DDILIGENT_BUILD_TOOLS_TESTS=ON"
+          # - name:            "MinGW"
+          #   platform:        "Win32"
+          #   toolset:         "x64"
+          #   build_type:      "Release" # Debug build is unbelievably slow
+          #   cmake_generator: "MinGW Makefiles"
+          #   cmake_args:      "-DDILIGENT_BUILD_CORE_TESTS=ON -DDILIGENT_BUILD_TOOLS_TESTS=ON"
 
-          - name:            "UWP"
-            platform:        "UWP"
-            toolset:         "x64"
-            build_type:      "Debug"
-            cmake_generator: "Visual Studio 17 2022"
-            cmake_args:      "-DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION=10.0"
+          # - name:            "UWP"
+          #   platform:        "UWP"
+          #   toolset:         "x64"
+          #   build_type:      "Debug"
+          #   cmake_generator: "Visual Studio 17 2022"
+          #   cmake_args:      "-DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION=10.0"
 
-          - name:            "UWP"
-            platform:        "UWP"
-            toolset:         "x64"
-            build_type:      "Release"
-            cmake_generator: "Visual Studio 17 2022"
-            cmake_args:      "-DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION=10.0"
+          # - name:            "UWP"
+          #   platform:        "UWP"
+          #   toolset:         "x64"
+          #   build_type:      "Release"
+          #   cmake_generator: "Visual Studio 17 2022"
+          #   cmake_args:      "-DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION=10.0"
 
     name: Win10 -> ${{ matrix.name }}-${{ matrix.toolset }}, ${{ matrix.build_type }}
 
@@ -121,48 +121,50 @@ jobs:
       uses: DiligentGraphics/github-action/build@v1
 
 
-    - name: DiligentCoreTest
-      if:   ${{ success() && matrix.name != 'UWP'}}
-      uses: DiligentGraphics/github-action/run-core-tests@v1
+    # - name: DiligentCoreTest
+    #   if:   ${{ success() && matrix.name != 'UWP'}}
+    #   uses: DiligentGraphics/github-action/run-core-tests@v1
 
-    - name: DiligentCoreAPITest D3D11
-      if:   ${{ success() && (matrix.name == 'Win10' || matrix.name == 'Win8.1') }}
-      uses: DiligentGraphics/github-action/run-core-gpu-tests@v1
-      with:
-        mode: d3d11_sw
+    # - name: DiligentCoreAPITest D3D11
+    #   if:   ${{ success() && (matrix.name == 'Win10' || matrix.name == 'Win8.1') }}
+    #   uses: DiligentGraphics/github-action/run-core-gpu-tests@v1
+    #   with:
+    #     mode: d3d11_sw
 
-    - name: DiligentCoreAPITest D3D12
-      if:   ${{ success() && matrix.name == 'Win10' }}
-      uses: DiligentGraphics/github-action/run-core-gpu-tests@v1
-      with:
-        mode: d3d12_sw
+    # - name: DiligentCoreAPITest D3D12
+    #   if:   ${{ success() && matrix.name == 'Win10' }}
+    #   uses: DiligentGraphics/github-action/run-core-gpu-tests@v1
+    #   with:
+    #     mode: d3d12_sw
 
-    - name: DiligentCoreAPITest D3D12 DXC
-      if:   ${{ success() && matrix.name == 'Win10' }}
-      uses: DiligentGraphics/github-action/run-core-gpu-tests@v1
-      with:
-        mode:    d3d12_sw
-        use_dxc: true
+    # - name: DiligentCoreAPITest D3D12 DXC
+    #   if:   ${{ success() && matrix.name == 'Win10' }}
+    #   uses: DiligentGraphics/github-action/run-core-gpu-tests@v1
+    #   with:
+    #     mode:    d3d12_sw
+    #     use_dxc: true
 
 
-    - name: DiligentToolsTest
-      if:   ${{ success() && matrix.name != 'UWP'}}
-      uses: DiligentGraphics/github-action/run-tools-tests@v1
+    # - name: DiligentToolsTest
+    #   if:   ${{ success() && matrix.name != 'UWP'}}
+    #   uses: DiligentGraphics/github-action/run-tools-tests@v1
 
-    - name: DiligentToolsGPUTest D3D11
-      if:   ${{ success() && (matrix.name == 'Win10' || matrix.name == 'Win8.1') }}
-      uses: DiligentGraphics/github-action/run-tools-gpu-tests@v1
-      with:
-        mode: d3d11_sw
+    # - name: DiligentToolsGPUTest D3D11
+    #   if:   ${{ success() && (matrix.name == 'Win10' || matrix.name == 'Win8.1') }}
+    #   uses: DiligentGraphics/github-action/run-tools-gpu-tests@v1
+    #   with:
+    #     mode: d3d11_sw
 
-    - name: DiligentToolsGPUTest D3D12
-      if:   ${{ success() && matrix.name == 'Win10' }}
-      uses: DiligentGraphics/github-action/run-tools-gpu-tests@v1
-      with:
-        mode: d3d12_sw
+    # - name: DiligentToolsGPUTest D3D12
+    #   if:   ${{ success() && matrix.name == 'Win10' }}
+    #   uses: DiligentGraphics/github-action/run-tools-gpu-tests@v1
+    #   with:
+    #     mode: d3d12_sw
+
+    - run: Compress-Archive -DestinationPath ./loads.zip D:/a/DiligentEngine/build
 
     - name: Upload Artifact GitHub Action
       uses: actions/upload-artifact@v3
       with:
         name: downloadables
-        path: ${{github.workspace}}
+        path: loads.zip
